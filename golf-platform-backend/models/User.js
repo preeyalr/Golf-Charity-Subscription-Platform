@@ -1,57 +1,28 @@
 import mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema({
-  name: String,
-  email: { type: String, unique: true },
-  password: String,
-
-  role: {
-    type: String,
-    enum: ["user", "admin"],
-    default: "user",
-  },
-
-  subscription: {
-    type: {
+const userSchema = mongoose.Schema(
+  {
+    name: {
       type: String,
+      required: true,
     },
-    status: {
+
+    email: {
       type: String,
-      enum: ["active", "cancelled", "expired"],
-      default: "expired",
+      required: true,
+      unique: true,
     },
-    startDate: Date,
-    endDate: Date,
-  },
 
-  charity: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Charity",
-  },
+    password: {
+      type: String,
+      required: true,
+    },
 
-  // 🔥 NEW
-  charityPercentage: {
-    type: Number,
-    default: 10,
+    resetToken: String,
   },
-
-  totalDonated: {
-    type: Number,
-    default: 0,
-  },
-  country: {
-  type: String,
-  default: "India",
-},
-
-currency: {
-  type: String,
-  default: "INR",
-},
-team: {
-  type: mongoose.Schema.Types.ObjectId,
-  ref: "Team",
-},
-});
+  {
+    timestamps: true,
+  }
+);
 
 export default mongoose.model("User", userSchema);
