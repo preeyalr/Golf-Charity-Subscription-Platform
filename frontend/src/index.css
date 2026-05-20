@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+/* 🌑 Base Theme */
+body {
+  background: linear-gradient(135deg, #0f172a, #020617);
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+/* 🌟 Glass Cards */
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 16px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* ✨ Buttons */
+.btn {
+  background: linear-gradient(135deg, #22c55e, #4f46e5);
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* 💡 Inputs */
+.input {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+  margin-bottom: 10px;
+}
