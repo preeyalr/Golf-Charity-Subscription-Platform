@@ -1,82 +1,89 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import API from "../services/api";
 
-export default function Register() {
-  const [role, setRole] = useState("user");
-  const [form, setForm] = useState({
+import AuthLayout from "../../components/auth/AuthLayout";
+import AuthCard from "../../components/auth/AuthCard";
+import AuthInput from "../../components/auth/AuthInput";
+import AuthButton from "../../components/auth/AuthButton";
+
+import { registerUser } from "../../services/authService";
+
+const Register = () => {
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
 
-  const navigate = useNavigate();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await API.post("/auth/register", {
-        ...form,
-        role,
-      });
+      const data = await registerUser(formData);
 
-      navigate("/login");
-    } catch (err) {
-      alert(err.response?.data?.message || "Register failed");
+      localStorage.setItem(
+        "userInfo",
+        JSON.stringify(data)
+      );
+
+      console.log(data);
+
+    } catch (error) {
+      console.log(error);
     }
   };
 
   return (
-    <div className="h-screen flex items-center justify-center">
-      <form onSubmit={handleSubmit} className="bg-gray-900 p-6 rounded w-full max-w-md space-y-4">
+    <AuthLayout>
 
-        <h2 className="text-xl font-bold text-center">Register</h2>
+      <AuthCard>
 
-        {/* 🔥 Role */}
-        <select
-          value={role}
-          onChange={(e) => setRole(e.target.value)}
-          className="w-full p-2 rounded bg-gray-800"
-        >
-          <option value="user">User</option>
-          <option value="admin">Admin</option>
-        </select>
+        <h1 className="text-4xl font-bold text-white mb-8">
+          Create Account
+        </h1>
 
-        <input
-          type="text"
-          placeholder="Name"
-          className="w-full p-2 rounded bg-gray-800"
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-          required
-        />
+        <form onSubmit={handleSubmit}>
 
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full p-2 rounded bg-gray-800"
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-          required
-        />
+          <AuthInput
+            type="text"
+            placeholder="Full Name"
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                name: e.target.value,
+              })
+            }
+          />
 
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full p-2 rounded bg-gray-800"
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-          required
-        />
+          <AuthInput
+            type="email"
+            placeholder="Email Address"
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                email: e.target.value,
+              })
+            }
+          />
 
-        <button className="btn w-full">Register</button>
+          <AuthInput
+            type="password"
+            placeholder="Password"
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                password: e.target.value,
+              })
+            }
+          />
 
-        <p className="text-center text-sm">
-          Already have an account?{" "}
-          <Link to="/login" className="text-blue-400">
-            Login
-          </Link>
-        </p>
+          <AuthButton text="Create Account" />
 
-      </form>
-    </div>
+        </form>
+
+      </AuthCard>
+
+    </AuthLayout>
   );
-}
+};
+
+export default Register;

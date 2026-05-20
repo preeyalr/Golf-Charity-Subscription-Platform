@@ -1,7 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Login from "./pages/auth/Login";
-import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import AddScore from "./pages/AddScore";
 import Subscribe from "./pages/Subscribe";
@@ -12,6 +10,8 @@ import Charities from "./pages/Charities";
 import Donate from "./pages/Donate";
 import Verify from "./pages/Verify";
 import AdminVerification from "./pages/AdminVerification";
+import Register from "./pages/auth/Register";
+import Login from "./pages/auth/Login";
 
 function App() {
   return (
