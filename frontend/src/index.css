@@ -43,3 +43,19 @@ body {
   width: 100%;
   margin-bottom: 10px;
 }
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #0f172a;
+  color: white;
+  overflow-x: hidden;
+}
+
+.glow {
+  box-shadow: 0 0 40px rgba(124, 58, 237, 0.4);
+}
